@@ -1,5 +1,5 @@
-from fastapi import APIRouter
-import os
+from fastapi import APIRouter, Depends
+from helpers.config import get_settings, Settings
 
 # APIrouter is a class that allows the route seperation across files(modules).
 base_router = APIRouter(
@@ -11,10 +11,11 @@ base_router = APIRouter(
 )
 
 @base_router.get("/")
-async def wel():
-# async is used in function definition to apply asynchronous interaction 
-    # we()
-    name = os.getenv("APP_NAME")
+    # because we cant continue execution if get_settings fails,
+    # we make it as main dependent for the flow
+    # we strictly tells that app_settings is from class Settings
+async def wel(app_settings : Settings = Depends(get_settings)):
+
     return {
-        "message":name
+        "message":app_settings.APP_NAME
     }
