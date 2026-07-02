@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, UploadFile
+
 from helpers.config import get_settings, Settings
 from controllers import DataController
 
@@ -14,6 +15,6 @@ async def upload_data(project_id : str,file: UploadFile,
 
     # because the validation is logic work we seperate it
     # in controllers then call it here
-    is_valid = DataController().validate_uploaded_file(file=file)
+    is_valid, result = DataController().validate_uploaded_file(file=file)
 
-    return is_valid
+    return is_valid, result
