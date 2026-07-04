@@ -1,0 +1,6 @@
+pydantic-settings
+fastapi
+pydantic
+load_dotenv
+python-multipart
+aiofiles
