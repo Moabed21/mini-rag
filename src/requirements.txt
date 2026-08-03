@@ -4,3 +4,5 @@ pydantic
 load_dotenv
 python-multipart
 aiofiles
+langchain
+PyMuPDF
