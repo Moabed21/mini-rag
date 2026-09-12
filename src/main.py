@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from routes import base ,data # Import the module itself
-# from motor.motor_asyncio import AsyncIOMotorClient
+from motor.motor_asyncio import AsyncIOMotorClient
 from helpers.config import get_settings
 from contextlib import asynccontextmanager
 from typing import AsyncGenerator
