@@ -39,7 +39,7 @@ class ProcessController(BaseController):
 
         if file_extention == ProcessingEnum.TXT.value:
 
-            return Textloader(file_path,encoding="utf-8")
+            return TextLoader(file_path,encoding="utf-8")
             # utf-8 for arabic support
 
         if file_extention == ProcessingEnum.PDF.value:
