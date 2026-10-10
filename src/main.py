@@ -5,13 +5,16 @@ from helpers.config import get_settings
 from contextlib import asynccontextmanager
 from typing import AsyncGenerator
 from motor.motor_asyncio import AsyncIOMotorClient
-
+from models.ProjectModel import ProjectModel
+from models.ChunkModel import ChunkModel
 
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     settings = get_settings()
     app.mongo_conn = AsyncIOMotorClient(settings.MONGODB_URL)
     app.db_client = app.mongo_conn[settings.MONGODB_DATABASE]
+    await ProjectModel.create_instance(db_client=app.db_client)
+    await ChunkModel.create_instance(db_client=app.db_client)
     yield
     app.mongo_conn.close()
 

@@ -1,8 +1,11 @@
 pydantic-settings
 fastapi
 pydantic
-load_dotenv
+python-dotenv
 python-multipart
 aiofiles
 langchain
+langchain-community
+langchain-text-splitters
 PyMuPDF
+motor
