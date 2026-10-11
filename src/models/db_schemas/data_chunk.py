@@ -3,25 +3,23 @@ from bson.objectid import ObjectId
 from typing import Optional
 
 class DataChunk(BaseModel):
-    _id: Optional[ObjectId]
+    id: Optional[ObjectId] = Field(default=None, alias="_id")
     chunk_text: str = Field(..., min_length=1)
     chunk_metadata: dict
     chunk_order: int = Field(..., gt=0)
     chunk_project_id: ObjectId
+    chunk_asset_id: Optional[ObjectId] = None
 
-    model_config=ConfigDict(arbitrary_types_allowed=True)
-        # this tells pydantic: if you find an unknown type like objectid skip it
+    model_config = ConfigDict(arbitrary_types_allowed=True, populate_by_name=True, extra="allow")
 
     @classmethod
     def get_indexes(cls):
-
         return [
             {
-                "key":[
+                "key": [
                     ("chunk_project_id", 1)
                 ],
                 "name": "chunk_project_id_index_1",
-                # False cuz may be chunks exists with same project_id
                 "unique": False
             }
         ]
