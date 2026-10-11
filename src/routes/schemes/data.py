@@ -1,12 +1,8 @@
 from pydantic import BaseModel
 from typing import Optional
 
-# schema job is about processing file content ,content extraction,
-# validation 
-
 class ProcessRequest(BaseModel):
-    file_id: str
-    
+    file_id: Optional[str] = None
     chunk_size: Optional[int] = 100
     overlap_size: Optional[int] = 20
     do_reset: Optional[int] = 0
